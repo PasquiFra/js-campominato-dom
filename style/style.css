@@ -1,0 +1,54 @@
+/* ------------ CSS PROPERTIES ------------*/
+
+/* Funzionalità di centralizzazione tramite :root */
+:root {
+    --cols-per-row: 7;
+}
+
+
+header {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+
+    padding: 30px;
+
+    background-color: grey;
+}
+
+main {
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+
+}
+
+#grid {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    height: 500px;
+    width: 500px;
+    
+    padding: 30px;
+}
+
+.cell {
+    width: calc(100% / var(--cols-per-row));
+    height: calc(100% / var(--cols-per-row));
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: azure;
+    border: 1px solid black;
+}
+
+.cell.clicked {
+    background-color: dodgerblue;
+}
