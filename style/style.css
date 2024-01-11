@@ -52,3 +52,7 @@ main {
 .cell.clicked {
     background-color: dodgerblue;
 }
+
+.cell.clicked.bomb {
+    background-color: red;
+}
