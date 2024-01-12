@@ -16,27 +16,24 @@ const generateBomb = (maxNum, totalNums , array) => {
         if (!array.includes(number)) array.push(number)
     };
 }
-/*
-const selectAll = (array, maxNum, cell) => {
-    
-    for (cell of cells){
+
+// Funzione per rivelare le celle 
+
+const revealAll = (cell, array) => {
+    const cells = document.querySelectorAll(".cell");
+    for (cell of cells) {
         cell.classList.add("clicked");
-        if (array.includes(i)){
+        if (array.includes(parseInt(cell.innerText))) {
             cell.classList.add("bomb");
         }
     }
 }
-*/
 
-const endGame = (score, hasWon = false ) => {
+const endGame = (score, hasWon = false, cell, array) => {
     
-    const message = hasWon 
-    ? "hai vinto" 
-    : `hai perso! hai totalizzato ${score} punti"`
+    const message = hasWon ? `Hai vinto totalizzando il punteggio massimo di ${score}` : `hai perso! hai totalizzato ${score} punti"`
     
-    cell.classList.add("bomb");
+    revealAll(cell, array);
 
-    // selectAll(array, maxNum, cell)
-    
-
+    alert (message);
 }

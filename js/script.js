@@ -14,11 +14,9 @@ let cellsNum;
 // imposto il numero di bombe da posizionare
 const bombsToPlace = 16;
 
-// inserisco i messaggi di fine gioco 
-const loseMessage = "Hai pestato una bomba!";
-
 // imposto il contatore di punteggio
 let score = 0;
+
 
 function startGame () {
     
@@ -26,10 +24,11 @@ function startGame () {
     title.classList.add = "d-none";
     
     //cliccando di nuovo il bottone svuoto i campi:
-    const generatedBombs = [];
-    grid.innerText = "";
-    cellsNum = "";
-    startButton.innerHTML = "Ricomincia";
+    const generatedBombs = []; //array contenente le bombe precedentemente create (da ricreare quindi)
+    grid.innerText = ""; // la griglia
+    cellsNum = ""; //numero di celle per riga/colonna in base alla difficoltà
+    startButton.innerHTML = "Ricomincia"; //il bottone cambia scritta
+    points.innerText = 0; // azzeramento score 
     
     console.log("cliccato");
     
@@ -53,9 +52,13 @@ function startGame () {
     const cols = cellsNum;
     let totalCells = rows * cols;
     
+    //inserisco la funzione di generazione delle bombe
+    generateBomb (totalCells, bombsToPlace, generatedBombs);
+
     // imposto il punteggio massimo
     const maxPoints = totalCells - bombsToPlace ;
-    console.log("numero celle (riga/colonna)", cellsNum, "totale celle", totalCells);
+
+    console.log("numero celle (riga/colonna)", cellsNum, "totale celle", totalCells, "punteggio massimo", maxPoints);
     
     // Genero la griglia con il numero di celle richieste
     for (let i = 1 ; i <= totalCells ; i++) {
@@ -63,8 +66,6 @@ function startGame () {
         //inserisco la funzione che genera una singola griglia
         const cell = generateGrid(i);
         
-        //inserisco la funzione di generazione delle bombe
-        generateBomb (totalCells, bombsToPlace, generatedBombs);
         
         //inserisco l'event listener che mi permette di applicare uno sfondo quando clicco
         cell.addEventListener("click", function() {
@@ -75,18 +76,16 @@ function startGame () {
             console.log("i: ", i);
 
             // controllo se ho cliccato una bomba
-            const HitBomb = generatedBombs.includes(i);
+            const hitBomb = generatedBombs.includes(i);
 
-            if (HitBomb) {
-                console.log(loseMessage);
+            if (hitBomb) {
                 cell.classList.add("bomb");
-                endGame(score, false);
+                endGame(score, false, cell, generatedBombs);
             } else {
-                score += 1;
-                points.innerText = score;
+                points.innerText = ++score;
 
                 if (score === maxPoints) {
-                    endGame(score, true)
+                    endGame(score, true, cell, generatedBombs)
                 }
             }
 
