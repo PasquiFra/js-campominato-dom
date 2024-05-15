@@ -5,6 +5,10 @@
     --cols-per-row: 7;
 }
 
+body {
+    height: 100vh;
+    background-color: lightgray;
+}
 
 header {
     display: flex;
@@ -20,7 +24,8 @@ main {
     background-color: lightgray;
     display: flex;
     justify-content: center;
-
+    align-content: center;
+    padding-top: 75px;
 }
 
 #grid {
@@ -28,10 +33,10 @@ main {
     align-content: center;
     justify-content: center;
     flex-wrap: wrap;
-    
+
     height: 500px;
     width: 500px;
-    
+
     padding: 30px;
 }
 
